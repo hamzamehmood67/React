@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 
 function MainNavigation() {
@@ -6,14 +7,19 @@ function MainNavigation() {
       <nav>
         <ul className={classes.list}>
           <li>
-            <a>Home</a>
+            <NavLink to={'/'} className={({isActive})=> isActive? classes.active: ''} end >Home</NavLink>
           </li>
           <li>
-            <a>Events</a>
+          <NavLink to={'/events'} className={({isActive})=> isActive? classes.active: ''} end  >Events</NavLink>
           </li>
+          <li>
+          <NavLink to={'/events/new'} className={({isActive})=> isActive? classes.active: ''} end  >Add Event</NavLink>
+          </li>
+      
         </ul>
       </nav>
     </header>
+    
   );
 }
 
