@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import EventsList from "../components/EventsList"
+
 import axios from "axios"
 
 
