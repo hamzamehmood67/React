@@ -4,13 +4,15 @@ import axios from "axios"
 
 
 export default function EventPage(){
-    let events=[];
-
+  const [events, setEvents] = useState([]);
+  console.log("Rendering")
     useEffect(()=>{
          axios.get('http://localhost:8080/events').then((res)=>{
-           events=res.data;
+          console.log(res.data.events)
+          setEvents(res.data.events)
+         
          });
-    })
-
+    }, [])
+    
     return <EventsList events={events}/>
 }
