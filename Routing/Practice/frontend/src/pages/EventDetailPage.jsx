@@ -1,12 +1,11 @@
 import axios from "axios";
 import EventItem from "../components/EventItem";
-import { useLoaderData } from "react-router-dom";
+import { redirect, useRouteLoaderData } from "react-router-dom";
 
 
 export default function EventDetailPage(){
-    const data=useLoaderData();
-
-    return <EventItem event={data} />
+    const data=useRouteLoaderData('event-detail');
+    return <EventItem event={data.event} />
 }
 
 export async function  loader({request, params}){
@@ -17,6 +16,16 @@ export async function  loader({request, params}){
     {
         throw {message: "An Error Occured"}
     }
-    console.log(res)
-    return res;
+    return res.data;
+}
+
+
+export async function action({request, params}) {
+    const id=params.eventId
+    const res=await axios({
+        method: request.method, 
+        url: 'http://localhost:8080/events/'+id
+    })
+    console.log(res);
+    return redirect('/events');
 }
